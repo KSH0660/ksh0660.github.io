@@ -6,7 +6,7 @@ export interface Prompt {
   prompt: string;
 }
 
-export const categories = ["All", "Documentation"] as const;
+export const categories = ["All", "Documentation", "Ideation"] as const;
 
 export const prompts: Prompt[] = [
   {
@@ -66,5 +66,21 @@ export const prompts: Prompt[] = [
 [출력 규칙]
 - 두 파일의 전체 내용을 수정된 마크다운 코드 블록 형식으로 각각 출력해 줘.
 - 어떤 부분을 왜 수정하고 추가했는지, 수정 내역(Changelog)을 간단히 요약해서 먼저 설명해 줘.`,
+  },
+  {
+    id: "creative-feature-proposal",
+    title: "창의적 기능 아이디어 제안서",
+    category: "Ideation",
+    description:
+      "프로젝트에 추가할 수 있는 창의적이고 실용적인 기능 아이디어를 구조화된 형식으로 5가지 이상 제안받는 프롬프트.",
+    prompt: `추가할 수 있는 창의적이고 실용적인 기능들을 5가지 이상 제안해 줘. 답변 시 아래 형식을 반드시 지켜서 작성해 줘:
+
+기능명 및 설명: (재미있거나 신기한 포인트 포함)
+
+유용한 이유: (사용자 경험 측면 등)
+
+구현 난이도: (상/중/하)
+
+간단한 구현 힌트: (사용하기 좋은 JS 라이브러리나 CSS 기법 등)`,
   },
 ];
