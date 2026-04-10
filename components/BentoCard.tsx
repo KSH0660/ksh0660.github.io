@@ -7,7 +7,6 @@ interface Props {
 
 const categoryLabel: Record<Project["category"], string> = {
   Service: "Service",
-  GitPage: "Git Page",
 };
 
 export default function BentoCard({ project }: Props) {
