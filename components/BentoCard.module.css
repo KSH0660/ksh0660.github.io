@@ -1,0 +1,94 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 28px;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: background 0.2s, border-color 0.2s;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card:hover {
+  background: var(--color-card-hover);
+  border-color: var(--color-text-secondary);
+}
+
+.category {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-tag-text);
+  background: var(--color-tag-bg);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  width: fit-content;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--color-text);
+}
+
+.description {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.action {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin-top: auto;
+}
+
+/* Size variants — desktop only */
+.large {
+  grid-column: span 2;
+  grid-row: span 2;
+  padding: 36px;
+}
+
+.large .title {
+  font-size: 28px;
+  letter-spacing: -0.5px;
+}
+
+.large .description {
+  font-size: 16px;
+}
+
+.medium {
+  grid-column: span 2;
+  grid-row: span 1;
+}
+
+.wide {
+  grid-column: span 2;
+  grid-row: span 1;
+}
+
+@media (max-width: 640px) {
+  .large,
+  .medium,
+  .wide {
+    grid-column: span 1;
+    grid-row: span 1;
+    padding: 24px;
+  }
+
+  .large .title {
+    font-size: 20px;
+  }
+
+  .large .description {
+    font-size: 14px;
+  }
+}

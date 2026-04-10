@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Maker | Prompt Collection",
+  title: "Maker | Build, Share, Repeat",
   description:
-    "Essential prompts and tools curated by a Maker. Discover, copy, and use prompts that boost your productivity.",
+    "Developer portfolio and service hub. Services I've built and resources I've shared.",
   openGraph: {
-    title: "Maker | Prompt Collection",
+    title: "Maker | Build, Share, Repeat",
     description:
-      "Essential prompts and tools curated by a Maker.",
+      "Developer portfolio and service hub by Maker.",
     type: "website",
     url: "https://ksh0660.github.io",
   },
