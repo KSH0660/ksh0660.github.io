@@ -17,6 +17,12 @@
   border-color: var(--color-text-secondary);
 }
 
+.card.focused {
+  background: var(--color-card-hover);
+  border-color: var(--color-text);
+  box-shadow: 0 0 0 2px var(--color-accent);
+}
+
 .category {
   font-size: 12px;
   font-weight: 500;

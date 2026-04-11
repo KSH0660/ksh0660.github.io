@@ -64,6 +64,112 @@
   font-size: 15px;
 }
 
+.filterKey {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 4px;
+  background: var(--color-border);
+  color: var(--color-text-secondary);
+  margin-right: 6px;
+}
+
+.filter.active .filterKey {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--color-bg);
+}
+
+/* Shortcut hint button */
+.shortcutHint {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  font-size: 16px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.shortcutHint:hover {
+  background: var(--color-card-hover);
+  border-color: var(--color-text-secondary);
+}
+
+/* Shortcut overlay */
+.shortcutOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--color-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shortcutPanel {
+  background: var(--color-modal-bg);
+  border-radius: var(--radius-lg);
+  padding: 28px 32px;
+  max-width: 340px;
+  width: calc(100% - 48px);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.12);
+}
+
+.shortcutTitle {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: -0.3px;
+}
+
+.shortcutList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.shortcutRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+.shortcutRow span {
+  margin-left: auto;
+}
+
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 26px;
+  padding: 0 6px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--color-code-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  color: var(--color-text);
+}
+
 @media (max-width: 640px) {
   .section {
     padding: 0 var(--spacing-page) 60px;
@@ -71,5 +177,13 @@
 
   .grid {
     grid-template-columns: 1fr;
+  }
+
+  .filterKey {
+    display: none;
+  }
+
+  .shortcutHint {
+    display: none;
   }
 }
