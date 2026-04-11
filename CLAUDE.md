@@ -46,7 +46,23 @@ components/PromptGallery.tsx  — 카테고리 필터링 + 프롬프트 선택 �
                                            (Client Component, useRef/useEffect)
 ```
 
+```
+data/projects.ts         — 프로젝트 원본 데이터 (Project[] 배열, repo 정보 포함)
+        │
+        ├──▶ [prebuild] scripts/fetch-project-durations.mjs
+        │       GitHub REST API로 repo의 created_at + 최신 커밋 날짜 조회
+        │       → data/projectDurations.ts 자동 생성
+        │
+        ▼
+components/BentoGrid.tsx      — projects + projectDurations 병합
+        │
+        └──▶ components/BentoCard.tsx   — 프로젝트 카드 렌더링
+                                          제목 아래에 기간 표시 (YYYY.MM.DD ~ YYYY.MM.DD (N일간))
+```
+
 ### 상세 데이터 흐름
+
+**프롬프트 흐름:**
 
 1. `data/prompts.ts`에서 `prompts` 배열과 `categories` 튜플을 export
 2. `PromptGallery`가 데이터를 import하고, `activeCategory` 상태로 필터링
@@ -54,6 +70,15 @@ components/PromptGallery.tsx  — 카테고리 필터링 + 프롬프트 선택 �
 4. 사용자가 카드를 클릭하면 `selectedPrompt` 상태가 설정됨
 5. `PromptModal`이 `selectedPrompt` prop을 받아 `<dialog>` API로 모달 표시
 6. 복사 버튼 클릭 → `navigator.clipboard.writeText()` → "Copied!" 피드백 (2초)
+
+**프로젝트 Duration 흐름:**
+
+1. `npm run build` 시 `prebuild` 스크립트가 자동 실행
+2. `scripts/fetch-project-durations.mjs`가 `data/projects.ts`에서 `repo` 필드를 파싱
+3. 각 프로젝트의 GitHub REST API를 호출하여 `created_at`(시작일)과 최신 커밋 날짜(종료일) 조회
+4. 결과를 `data/projectDurations.ts`에 기록 (API 실패 시 빈 맵, 빌드 중단 없음)
+5. `BentoGrid`가 `projects`와 `projectDurations`를 병합하여 `BentoCard`에 전달
+6. `BentoCard`가 `duration`이 존재할 경우 `YYYY.MM.DD ~ YYYY.MM.DD (N일간)` 형태로 표시
 
 ---
 
@@ -68,11 +93,17 @@ components/PromptGallery.tsx  — 카테고리 필터링 + 프롬프트 선택 �
 │   └── page.module.css     # 페이지 레벨 스타일
 ├── components/
 │   ├── Hero.tsx / .module.css
+│   ├── BentoGrid.tsx / BentoCard.tsx / .module.css
 │   ├── PromptGallery.tsx / .module.css
 │   ├── PromptCard.tsx / .module.css
 │   └── PromptModal.tsx / .module.css
 ├── data/
-│   └── prompts.ts          # 프롬프트 데이터 + TypeScript 타입
+│   ├── prompts.ts          # 프롬프트 데이터 + TypeScript 타입
+│   ├── projects.ts         # 프로젝트 데이터 (repo 필드 포함)
+│   ├── projectDurations.ts # [자동 생성] 프로젝트 기간 데이터
+│   └── journey.ts          # 경력/학력 타임라인 데이터
+├── scripts/
+│   └── fetch-project-durations.mjs  # prebuild: GitHub API → 기간 데이터 생성
 ├── public/
 │   └── favicon.svg
 ├── .github/workflows/
@@ -88,7 +119,7 @@ components/PromptGallery.tsx  — 카테고리 필터링 + 프롬프트 선택 �
 
 ### 5-1. 아키텍처 규칙
 
-1. **데이터와 UI를 분리할 것**: 프롬프트 데이터는 반드시 `data/prompts.ts`에서 관리한다. 컴포넌트 내부에 하드코딩하지 않는다.
+1. **데이터와 UI를 분리할 것**: 프롬프트 데이터는 `data/prompts.ts`, 프로젝트 데이터는 `data/projects.ts`에서 관리한다. 컴포넌트 내부에 하드코딩하지 않는다. `data/projectDurations.ts`는 자동 생성 파일이므로 직접 수정하지 않는다.
 2. **Client/Server 컴포넌트 경계를 유지할 것**: `"use client"` 디렉티브는 상태(useState, useEffect 등)가 필요한 컴포넌트에만 사용한다. `Hero`, `PromptCard`처럼 순수 렌더링 컴포넌트는 Server Component로 유지한다.
 3. **CSS Modules 패턴을 유지할 것**: 인라인 스타일이나 외부 CSS 프레임워크를 도입하지 않는다. 모든 컴포넌트는 `.module.css` 파일을 갖는다. 디자인 토큰은 `globals.css`의 CSS Custom Properties를 사용한다.
 4. **정적 빌드 호환성을 유지할 것**: `output: "export"` 설정 하에서 동작해야 하므로, 서버 사이드 API 라우트(`app/api/`), 동적 라우팅의 서버 기능, `next/headers`, `next/cookies` 등은 사용할 수 없다.
@@ -117,9 +148,33 @@ components/PromptGallery.tsx  — 카테고리 필터링 + 프롬프트 선택 �
 
 ```bash
 npm run dev      # 로컬 개발 서버 (http://localhost:3000)
-npm run build    # 정적 빌드 → ./out 디렉토리 생성
+npm run build    # prebuild(GitHub API fetch) + 정적 빌드 → ./out 디렉토리 생성
 npm run start    # 프로덕션 서버 (로컬 테스트용)
 ```
 
 - `main` 브랜치에 push하면 GitHub Actions가 자동으로 빌드 및 GitHub Pages 배포를 수행한다.
+- `npm run build` 실행 시 `prebuild` 스크립트가 먼저 실행되어 GitHub API에서 프로젝트 기간 데이터를 가져온다.
 - 빌드 결과물은 `./out` 디렉토리에 정적 HTML/CSS/JS로 생성된다.
+
+---
+
+## 7. 프로젝트 추가 가이드
+
+새 프로젝트를 추가할 때는 `data/projects.ts`에 항목을 추가하기만 하면 된다. `repo` 필드를 포함하면 CI/CD 빌드 시 GitHub API에서 자동으로 기간(시작일~종료일, 소요 일수)이 계산된다.
+
+```typescript
+// data/projects.ts
+{
+  id: "new-project",
+  title: "New Project",
+  category: "Service",
+  description: "프로젝트 설명",
+  url: "https://deployed-service.com",        // 서비스 링크
+  repo: { owner: "KSH0660", name: "RepoName" }, // GitHub 레포 → 기간 자동 생성
+  size: "medium",
+}
+```
+
+- `repo` 필드가 있으면 → 빌드 시 `YYYY.MM.DD ~ YYYY.MM.DD (N일간)` 자동 표시
+- `repo` 필드가 없으면 → 기간 미표시 (정상 동작)
+- `data/projectDurations.ts`는 **자동 생성 파일**이므로 직접 수정하지 말 것

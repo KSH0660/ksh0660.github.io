@@ -32,6 +32,7 @@
 | **원클릭 복사** | Clipboard API를 활용한 프롬프트 즉시 복사 |
 | **반응형 UI** | 모바일/데스크톱 대응 CSS Grid 레이아웃 |
 | **정적 배포** | Next.js Static Export → GitHub Pages 자동 배포 |
+| **프로젝트 기간 자동 표기** | GitHub API로 레포 생성일~최신 커밋 날짜 자동 조회, 카드에 표시 |
 
 ---
 
@@ -78,11 +79,18 @@ ksh0660.github.io/
 │   └── page.module.css     # 페이지 스타일
 ├── components/             # React 컴포넌트
 │   ├── Hero.tsx            # 히어로 섹션
+│   ├── BentoGrid.tsx       # 프로젝트 그리드
+│   ├── BentoCard.tsx       # 프로젝트 카드 (기간 표시 포함)
 │   ├── PromptGallery.tsx   # 갤러리 (필터링 + 상태 관리)
 │   ├── PromptCard.tsx      # 프롬프트 카드
 │   └── PromptModal.tsx     # 상세 보기 모달
 ├── data/
-│   └── prompts.ts          # 프롬프트 데이터 + 타입 정의
+│   ├── prompts.ts          # 프롬프트 데이터 + 타입 정의
+│   ├── projects.ts         # 프로젝트 데이터 (repo 정보 포함)
+│   ├── projectDurations.ts # [자동 생성] 프로젝트 기간 데이터
+│   └── journey.ts          # 경력/학력 타임라인 데이터
+├── scripts/
+│   └── fetch-project-durations.mjs  # prebuild 스크립트
 ├── public/                 # 정적 에셋
 ├── .github/workflows/
 │   └── deploy.yml          # GitHub Pages 자동 배포 워크플로우
@@ -106,10 +114,33 @@ ksh0660.github.io/
 `main` 브랜치에 push하면 GitHub Actions가 자동으로 빌드 및 배포를 수행합니다.
 
 ```
-push to main → GitHub Actions → npm ci → npm run build → ./out → GitHub Pages
+push to main → GitHub Actions → npm ci → prebuild (GitHub API fetch) → next build → ./out → GitHub Pages
 ```
 
+`prebuild` 단계에서 GitHub REST API를 호출하여 각 프로젝트의 개발 기간(시작일~종료일)을 자동으로 가져옵니다.
+
 워크플로우 설정: [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
+
+---
+
+## 프로젝트 추가 방법
+
+`data/projects.ts`에 새 항목을 추가하면 됩니다. `repo` 필드를 포함하면 빌드 시 개발 기간이 자동으로 표시됩니다.
+
+```typescript
+{
+  id: "new-project",
+  title: "New Project",
+  category: "Service",
+  description: "프로젝트 설명",
+  url: "https://deployed-service.com",           // 서비스 링크
+  repo: { owner: "KSH0660", name: "RepoName" },  // GitHub 레포 → 기간 자동 생성
+  size: "medium",
+}
+```
+
+- `repo` 필드 포함 시: 카드에 `YYYY.MM.DD ~ YYYY.MM.DD (N일간)` 자동 표시
+- `repo` 필드 미포함 시: 기간 미표시 (정상 동작)
 
 ---
 

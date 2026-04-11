@@ -35,6 +35,13 @@
   color: var(--color-text);
 }
 
+.duration {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.2px;
+}
+
 .description {
   font-size: 14px;
   color: var(--color-text-secondary);
