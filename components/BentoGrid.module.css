@@ -7,6 +7,23 @@
   margin: 0 auto;
 }
 
+.sectionHeader {
+  margin-bottom: 32px;
+}
+
+.sectionTitle {
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+
+.sectionSubtitle {
+  font-size: 15px;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

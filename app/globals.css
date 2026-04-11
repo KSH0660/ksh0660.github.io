@@ -24,6 +24,10 @@
 
   --max-width: 960px;
   --spacing-page: 24px;
+
+  --color-timeline-line: #e0e0e0;
+  --color-timeline-dot: #111111;
+  --color-timeline-dot-edu: #888888;
 }
 
 [data-theme="dark"] {
@@ -39,6 +43,10 @@
   --color-overlay: rgba(0, 0, 0, 0.7);
   --color-modal-bg: #1a1a1a;
   --color-code-bg: #141414;
+
+  --color-timeline-line: #333333;
+  --color-timeline-dot: #e5e5e5;
+  --color-timeline-dot-edu: #666666;
 }
 
 *,
