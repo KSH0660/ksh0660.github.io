@@ -1,8 +1,14 @@
 import { projects } from "@/data/projects";
+import { projectDurations } from "@/data/projectDurations";
 import BentoCard from "./BentoCard";
 import styles from "./BentoGrid.module.css";
 
 export default function BentoGrid() {
+  const projectsWithDuration = projects.map((p) => ({
+    ...p,
+    duration: projectDurations[p.id] ?? undefined,
+  }));
+
   return (
     <section id="projects" className={styles.section}>
       <div className={styles.inner}>
@@ -13,7 +19,7 @@ export default function BentoGrid() {
           </p>
         </div>
         <div className={styles.grid}>
-          {projects.map((project) => (
+          {projectsWithDuration.map((project) => (
             <BentoCard key={project.id} project={project} />
           ))}
         </div>
