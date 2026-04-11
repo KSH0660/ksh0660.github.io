@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const dynamic = "force-static";
-export const alt = "Maker | Build, Share, Repeat";
+export const alt = "김선호 | Agentic AI | Maker";
 export const size = {
   width: 1200,
   height: 630,

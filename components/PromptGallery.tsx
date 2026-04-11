@@ -97,9 +97,9 @@ export default function PromptGallery() {
     <section id="prompts" className={styles.section}>
       <div className={styles.inner}>
         <div className={styles.header}>
-          <h2 className={styles.title}>Prompt Collection</h2>
+          <h2 className={styles.title}>My Toolkit</h2>
           <p className={styles.subtitle}>
-            Click any card to view the full prompt and copy it.
+            제가 직접 쓰는 툴입니다.
           </p>
         </div>
 
