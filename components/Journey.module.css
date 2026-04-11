@@ -64,11 +64,6 @@
   box-shadow: 0 0 0 2px var(--color-timeline-dot);
 }
 
-.education .dot {
-  background: var(--color-bg);
-  box-shadow: 0 0 0 2px var(--color-timeline-dot-edu);
-}
-
 .content {
   flex: 1;
 }
