@@ -53,11 +53,11 @@
 .large {
   grid-column: span 2;
   grid-row: span 2;
-  padding: 36px;
+  padding: 28px;
 }
 
 .large .title {
-  font-size: 28px;
+  font-size: 24px;
   letter-spacing: -0.5px;
 }
 

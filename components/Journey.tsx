@@ -8,7 +8,7 @@ export default function Journey() {
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>Journey</h2>
           <p className={styles.sectionSubtitle}>
-            AI 리서처에서 LLM 풀스택 엔지니어로. 연구실에서 프로덕션으로.
+            From AI research to production LLM systems.
           </p>
         </div>
         <div className={styles.timeline}>

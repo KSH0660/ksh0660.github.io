@@ -11,10 +11,10 @@ export const categories = ["All", "Documentation", "Ideation"] as const;
 export const prompts: Prompt[] = [
   {
     id: "claude-readme-generator",
-    title: "CLAUDE.md & README.md 자동 생성",
+    title: "CLAUDE.md & README.md Generator",
     category: "Documentation",
     description:
-      "AI 에이전트용 CLAUDE.md와 휴먼 개발자용 README.md를 프로젝트 분석 후 자동 생성하는 프롬프트.",
+      "Analyzes a project and generates an AI agent directive (CLAUDE.md) and a developer-facing README.",
     prompt: `[작업 목표]
 현재까지 개발된 '5축 스펙트럼 기반 심리 테스트' 프로젝트를 바탕으로, AI 코딩 에이전트를 위한 \`CLAUDE.md\` 파일과 휴먼 개발자를 위한 \`README.md\` 파일을 각각 작성해 줘.
 
@@ -42,10 +42,10 @@ export const prompts: Prompt[] = [
   },
   {
     id: "claude-readme-updater",
-    title: "CLAUDE.md & README.md 동기화 업데이트",
+    title: "CLAUDE.md & README.md Sync",
     category: "Documentation",
     description:
-      "최근 개발 변경사항을 분석하여 기존 CLAUDE.md와 README.md를 최신 상태로 동기화하는 프롬프트.",
+      "Updates existing CLAUDE.md and README.md to reflect recent codebase changes.",
     prompt: `[작업 목표]
 최근 진행된 개발 내용과 현재 코드베이스의 상태를 분석하여, 기존에 작성된 \`claude.md\` (AI 지침서)와 \`README.md\` (사용자 안내서)를 최신 상태로 업데이트(Sync)해 줘.
 
@@ -69,10 +69,10 @@ export const prompts: Prompt[] = [
   },
   {
     id: "creative-feature-proposal",
-    title: "창의적 기능 아이디어 제안서",
+    title: "Feature Idea Generator",
     category: "Ideation",
     description:
-      "프로젝트에 추가할 수 있는 창의적이고 실용적인 기능 아이디어를 구조화된 형식으로 5가지 이상 제안받는 프롬프트.",
+      "Generates 5+ structured feature proposals with feasibility ratings and implementation hints.",
     prompt: `추가할 수 있는 창의적이고 실용적인 기능들을 5가지 이상 제안해 줘. 답변 시 아래 형식을 반드시 지켜서 작성해 줘:
 
 기능명 및 설명: (재미있거나 신기한 포인트 포함)
