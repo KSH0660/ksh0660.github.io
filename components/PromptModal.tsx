@@ -12,6 +12,7 @@ interface Props {
 export default function PromptModal({ prompt, onClose }: Props) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [copied, setCopied] = useState(false);
+  const [shared, setShared] = useState(false);
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -37,6 +38,22 @@ export default function PromptModal({ prompt, onClose }: Props) {
     setTimeout(() => setCopied(false), 2000);
   }, [prompt]);
 
+  const handleShare = useCallback(async () => {
+    if (!prompt) return;
+    const url = `${window.location.origin}${window.location.pathname}#prompt/${prompt.id}`;
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: prompt.title, url });
+        return;
+      } catch {
+        /* user cancelled or not supported — fall through to clipboard */
+      }
+    }
+    await navigator.clipboard.writeText(url);
+    setShared(true);
+    setTimeout(() => setShared(false), 2000);
+  }, [prompt]);
+
   const handleBackdropClick = useCallback(
     (e: React.MouseEvent<HTMLDialogElement>) => {
       if (e.target === dialogRef.current) {
@@ -48,6 +65,7 @@ export default function PromptModal({ prompt, onClose }: Props) {
 
   useEffect(() => {
     setCopied(false);
+    setShared(false);
   }, [prompt]);
 
   if (!prompt) return null;
@@ -73,12 +91,21 @@ export default function PromptModal({ prompt, onClose }: Props) {
         <div className={styles.promptBlock}>
           <pre className={styles.promptText}>{prompt.prompt}</pre>
         </div>
-        <button
-          className={`${styles.copyButton} ${copied ? styles.copied : ""}`}
-          onClick={handleCopy}
-        >
-          {copied ? "Copied!" : "Copy Prompt"}
-        </button>
+        <div className={styles.actions}>
+          <button
+            className={`${styles.copyButton} ${copied ? styles.copied : ""}`}
+            onClick={handleCopy}
+          >
+            {copied ? "Copied!" : "Copy Prompt"}
+          </button>
+          <button
+            className={`${styles.shareButton} ${shared ? styles.shared : ""}`}
+            onClick={handleShare}
+            aria-label="Share prompt link"
+          >
+            {shared ? "Link Copied!" : "Share"}
+          </button>
+        </div>
       </div>
     </dialog>
   );
