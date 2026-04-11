@@ -2,15 +2,27 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ksh0660.github.io"),
   title: "Maker | Build, Share, Repeat",
   description:
     "Developer portfolio and service hub. Services I've built and resources I've shared.",
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+  },
   openGraph: {
     title: "Maker | Build, Share, Repeat",
     description:
       "Developer portfolio and service hub by Maker.",
     type: "website",
     url: "https://ksh0660.github.io",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Maker | Build, Share, Repeat",
+    description:
+      "Developer portfolio and service hub by Maker.",
   },
 };
 
