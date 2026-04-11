@@ -15,7 +15,7 @@ export default function Journey() {
           {journeyEntries.map((entry) => (
             <div
               key={entry.id}
-              className={`${styles.entry}${entry.type === "education" ? ` ${styles.education}` : ""}`}
+              className={styles.entry}
             >
               <div className={styles.marker}>
                 <div className={styles.dot} />

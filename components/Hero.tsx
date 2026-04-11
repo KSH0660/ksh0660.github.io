@@ -6,12 +6,12 @@ export default function Hero() {
       <div className={styles.inner}>
         <p className={styles.greeting}>Hi, I&apos;m Sunho Kim.</p>
         <h1 className={styles.title}>
-          AI Engineer
+          Agentic AI
           <br />
-          <span className={styles.accent}>&amp; Maker</span>
+          <span className={styles.accent}>| Maker</span>
         </h1>
         <p className={styles.subtitle}>
-          I build agentic AI systems at Samsung.
+          I build agentic AI systems.
           <br />
           On the side, I ship ideas into working products.
         </p>
