@@ -1,12 +1,34 @@
 // scripts/fetch-project-durations.mjs
-// Pre-build script: fetches GitHub repo dates and generates data/projectDurations.ts
+// Pre-build script: reads repo info from data/projects.ts, fetches GitHub dates,
+// and generates data/projectDurations.ts
 
 import fs from "node:fs";
 import path from "node:path";
 
-const PROJECTS = [
-  { id: "mindscope", owner: "KSH0660", repo: "MindScope" },
-];
+/**
+ * Parse data/projects.ts to extract project IDs and their repo fields.
+ * Uses simple regex matching — no TypeScript parser dependency needed.
+ */
+function parseProjectRepos() {
+  const filePath = path.join(process.cwd(), "data", "projects.ts");
+  const source = fs.readFileSync(filePath, "utf-8");
+
+  const projects = [];
+  const blockRe = /\{[^}]*id:\s*"([^"]+)"[^}]*\}/gs;
+
+  for (const block of source.matchAll(blockRe)) {
+    const text = block[0];
+    const id = block[1];
+    const ownerMatch = text.match(/owner:\s*"([^"]+)"/);
+    const nameMatch = text.match(/name:\s*"([^"]+)"/);
+
+    if (ownerMatch && nameMatch) {
+      projects.push({ id, owner: ownerMatch[1], repo: nameMatch[1] });
+    }
+  }
+
+  return projects;
+}
 
 async function fetchDuration(owner, repo) {
   const repoRes = await fetch(
@@ -36,9 +58,15 @@ async function fetchDuration(owner, repo) {
 }
 
 async function main() {
+  const projects = parseProjectRepos();
+
+  if (projects.length === 0) {
+    console.log("No projects with repo field found — skipping fetch.");
+  }
+
   const durations = {};
 
-  for (const { id, owner, repo } of PROJECTS) {
+  for (const { id, owner, repo } of projects) {
     try {
       durations[id] = await fetchDuration(owner, repo);
       console.log(`Fetched duration for ${id}: ${durations[id].totalDays} days`);
