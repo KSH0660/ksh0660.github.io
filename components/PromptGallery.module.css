@@ -1,5 +1,5 @@
 .section {
-  padding: 0 var(--spacing-page) 80px;
+  padding: 0 var(--spacing-page) 64px;
 }
 
 .inner {
@@ -8,7 +8,7 @@
 }
 
 .header {
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 
 .title {
@@ -26,7 +26,7 @@
 .filters {
   display: flex;
   gap: 8px;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
   flex-wrap: wrap;
 }
 
@@ -172,7 +172,7 @@
 
 @media (max-width: 640px) {
   .section {
-    padding: 0 var(--spacing-page) 60px;
+    padding: 0 var(--spacing-page) 48px;
   }
 
   .grid {

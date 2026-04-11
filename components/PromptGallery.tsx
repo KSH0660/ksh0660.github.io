@@ -99,7 +99,7 @@ export default function PromptGallery() {
         <div className={styles.header}>
           <h2 className={styles.title}>My Toolkit</h2>
           <p className={styles.subtitle}>
-            제가 직접 쓰는 툴입니다.
+            Prompts I actually use. Content is in Korean.
           </p>
         </div>
 

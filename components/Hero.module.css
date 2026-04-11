@@ -2,8 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 60vh;
-  padding: 80px var(--spacing-page) 60px;
+  padding: 100px var(--spacing-page) 64px;
 }
 
 .inner {
@@ -20,7 +19,7 @@
 }
 
 .title {
-  font-size: clamp(36px, 6vw, 64px);
+  font-size: clamp(32px, 5vw, 48px);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -1.5px;
@@ -35,28 +34,11 @@
   font-size: clamp(16px, 2vw, 20px);
   color: var(--color-text-secondary);
   line-height: 1.6;
-  margin-bottom: 40px;
-}
-
-.cta {
-  display: inline-block;
-  padding: 12px 28px;
-  background: var(--color-accent);
-  color: var(--color-bg);
-  font-size: 15px;
-  font-weight: 500;
-  border-radius: var(--radius-sm);
-  transition: opacity 0.2s;
-}
-
-.cta:hover {
-  opacity: 0.8;
 }
 
 @media (max-width: 640px) {
   .hero {
-    min-height: 50vh;
-    padding: 60px var(--spacing-page) 40px;
+    padding: 80px var(--spacing-page) 40px;
   }
 
   .subtitle br {

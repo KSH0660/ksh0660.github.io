@@ -14,7 +14,7 @@ export default function Home() {
       <PromptGallery />
       <Journey />
       <footer className={styles.footer}>
-        <p>&copy; 2026 김선호. Built with Next.js.</p>
+        <p>&copy; 2026 Sunho Kim</p>
       </footer>
     </main>
   );

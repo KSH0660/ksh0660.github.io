@@ -9,7 +9,7 @@ export default function BentoGrid() {
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>What I Build</h2>
           <p className={styles.sectionSubtitle}>
-            아이디어 &rarr; PoC &rarr; 서비스. 빠르게 만들고, 피드백 받고, 개선합니다.
+            Side projects. Idea to prototype, usually in a day.
           </p>
         </div>
         <div className={styles.grid}>
