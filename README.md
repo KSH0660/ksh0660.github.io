@@ -1,4 +1,4 @@
-# Maker | Prompt Collection
+# Sunho Kim — Portfolio
 
 ![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
@@ -6,7 +6,7 @@
 ![GitHub Pages](https://img.shields.io/badge/Deploy-GitHub%20Pages-222?logo=github)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-> AI 프롬프트를 큐레이션하고 공유하는 미니멀 포트폴리오 사이트
+> AI 엔지니어 김선호의 개인 포트폴리오 사이트
 
 **Live**: [https://ksh0660.github.io](https://ksh0660.github.io)
 
@@ -14,10 +14,11 @@
 
 ## Description
 
-매일 사용하는 AI 프롬프트를 한곳에 모아 관리하고, 누구나 쉽게 복사해서 쓸 수 있도록 만든 **프롬프트 컬렉션 사이트**입니다.
+agentic 시스템을 만들고 사이드 프로젝트를 출시하는 AI 엔지니어의 **개인 포트폴리오 사이트**입니다.
 
-- 카테고리별 필터링으로 원하는 프롬프트를 빠르게 탐색
-- 클릭 한 번으로 전체 프롬프트 텍스트를 클립보드에 복사
+- Bento 그리드 레이아웃으로 출시한 프로젝트들을 한눈에 소개
+- 각 프로젝트의 개발 기간(시작일~종료일)을 GitHub API로 자동 표기
+- 경력/학력 타임라인(Journey) 제공
 - 외부 라이브러리 없이 React + CSS Modules로 구현한 가벼운 정적 사이트
 
 ---
@@ -26,13 +27,13 @@
 
 | Feature | Description |
 |---------|-------------|
-| **프롬프트 갤러리** | 카드 레이아웃으로 프롬프트를 한눈에 탐색 |
-| **카테고리 필터** | 카테고리 버튼으로 원하는 분류만 빠르게 필터링 |
-| **상세 모달** | 네이티브 `<dialog>` 기반 모달에서 프롬프트 전문 확인 |
-| **원클릭 복사** | Clipboard API를 활용한 프롬프트 즉시 복사 |
+| **Hero** | 자기소개 + 외부 링크 (GitHub, LinkedIn 등) |
+| **What I Build** | Bento 그리드 레이아웃의 프로젝트 카드 |
+| **프로젝트 기간 자동 표기** | GitHub API로 레포 생성일~최신 커밋 날짜 자동 조회, 카드에 표시 |
+| **Journey** | 경력/학력 타임라인 |
+| **테마 토글** | 라이트/다크 모드 전환 |
 | **반응형 UI** | 모바일/데스크톱 대응 CSS Grid 레이아웃 |
 | **정적 배포** | Next.js Static Export → GitHub Pages 자동 배포 |
-| **프로젝트 기간 자동 표기** | GitHub API로 레포 생성일~최신 커밋 날짜 자동 조회, 카드에 표시 |
 
 ---
 
@@ -81,11 +82,9 @@ ksh0660.github.io/
 │   ├── Hero.tsx            # 히어로 섹션
 │   ├── BentoGrid.tsx       # 프로젝트 그리드
 │   ├── BentoCard.tsx       # 프로젝트 카드 (기간 표시 포함)
-│   ├── PromptGallery.tsx   # 갤러리 (필터링 + 상태 관리)
-│   ├── PromptCard.tsx      # 프롬프트 카드
-│   └── PromptModal.tsx     # 상세 보기 모달
+│   ├── Journey.tsx         # 경력/학력 타임라인
+│   └── ThemeToggle.tsx     # 라이트/다크 테마 토글
 ├── data/
-│   ├── prompts.ts          # 프롬프트 데이터 + 타입 정의
 │   ├── projects.ts         # 프로젝트 데이터 (repo 정보 포함)
 │   ├── projectDurations.ts # [자동 생성] 프로젝트 기간 데이터
 │   └── journey.ts          # 경력/학력 타임라인 데이터
