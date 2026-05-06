@@ -11,9 +11,9 @@ export default function Hero() {
           <span className={styles.accent}>| Maker</span>
         </h1>
         <p className={styles.subtitle}>
-          I build agentic AI systems.
+          I build agentic AI systems at Samsung.
           <br />
-          On the side, I ship ideas into working products.
+          On the side, I ship side projects from idea to production.
         </p>
         <div className={styles.social}>
           <a
