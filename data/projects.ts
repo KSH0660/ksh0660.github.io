@@ -21,7 +21,7 @@ export const projects: Project[] = [
     title: "MindScope",
     category: "Service",
     description: "Spectrum-based personality test across five psychological axes",
-    url: "https://mind-scope-five.vercel.app/",
+    url: "https://big5mindscope.com/",
     repo: { owner: "KSH0660", name: "MindScope" },
     size: "large",
   },
