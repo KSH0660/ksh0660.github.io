@@ -25,4 +25,13 @@ export const projects: Project[] = [
     repo: { owner: "KSH0660", name: "MindScope" },
     size: "large",
   },
+  {
+    id: "shadow-loop",
+    title: "Shadow Loop",
+    category: "Service",
+    description: "YouTube shadowing app that loops video segments with progressively revealed captions",
+    url: "https://shadow-loop.vercel.app/",
+    repo: { owner: "KSH0660", name: "ShadowLoop" },
+    size: "large",
+  },
 ];
